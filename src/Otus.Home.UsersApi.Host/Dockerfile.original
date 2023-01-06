@@ -1,0 +1,23 @@
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base
+WORKDIR /app
+EXPOSE 80
+
+FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
+WORKDIR /src
+COPY ["Otus.Home.UsersApi.Host/Otus.Home.UsersApi.Host.csproj", "Otus.Home.UsersApi.Host/"]
+COPY ["Otus.Home.UsersApi.DataAccess/Otus.Home.UsersApi.DataAccess.csproj", "Otus.Home.UsersApi.DataAccess/"]
+COPY ["Otus.Home.UsersApi.Core/Otus.Home.UsersApi.Core.csproj", "Otus.Home.UsersApi.Core/"]
+RUN dotnet restore "Otus.Home.UsersApi.Host/Otus.Home.UsersApi.Host.csproj"
+COPY . .
+WORKDIR "/src/Otus.Home.UsersApi.Host"
+RUN dotnet build "Otus.Home.UsersApi.Host.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "Otus.Home.UsersApi.Host.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Otus.Home.UsersApi.Host.dll"]
