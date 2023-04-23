@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otus-home-user-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: otus-home-user-api
+  template:
+    metadata:
+      labels:
+        app: otus-home-user-api
+    spec:
+      containers:
+        - name: otus-home-user-api-container
+          image: dimandocker/otus.home.userapi:1.0
+          ports:
+            - name: web
+              containerPort: 80
+          livenessProbe:
+            httpGet:
+              port: 80
+              path: /swagger/index.html
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              port: 80
+              path: /health
+            initialDelaySeconds: 10
+            periodSeconds: 5
