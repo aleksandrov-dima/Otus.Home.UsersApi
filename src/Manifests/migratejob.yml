@@ -1,0 +1,12 @@
+﻿apiVersion: batch/v1
+kind: Job
+metadata:
+  name: otus-home-user-api-migratejob
+spec:
+  template:
+    spec:
+      containers:
+        - name: otus-home-user-api-migratejob-container
+          image: dimandocker/otus.home.userapi.migratejob:1.0
+      restartPolicy: Never
+  backoffLimit: 2

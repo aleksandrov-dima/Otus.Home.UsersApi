@@ -1,0 +1,20 @@
+﻿FROM mcr.microsoft.com/dotnet/core/runtime:3.1 AS base
+WORKDIR /app
+
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+WORKDIR /src
+COPY ["Otus.Home.UsersApi.MigrateJob/Otus.Home.UsersApi.MigrateJob.csproj", "Otus.Home.UsersApi.MigrateJob/"]
+COPY ["../Otus.Home.UsersApi.DataAccess/Otus.Home.UsersApi.DataAccess.csproj", "Otus.Home.UsersApi.DataAccess/"]
+COPY ["./src/Otus.Home.UsersApi.Core/Otus.Home.UsersApi.Core.csproj", "Otus.Home.UsersApi.Core/"]
+RUN dotnet restore "Otus.Home.UsersApi.MigrateJob/Otus.Home.UsersApi.MigrateJob.csproj"
+COPY . .
+WORKDIR "/src/Otus.Home.UsersApi.MigrateJob"
+RUN dotnet build "Otus.Home.UsersApi.MigrateJob.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "Otus.Home.UsersApi.MigrateJob.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Otus.Home.UsersApi.MigrateJob.dll"]
