@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,7 +21,7 @@ namespace Otus.Home.UsersApi.Host
             Configuration = configuration;
         }
 
-        private IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; set; }
         
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -32,9 +33,11 @@ namespace Otus.Home.UsersApi.Host
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             
             services.AddScoped<IDbInitializer, EfDbInitializer>();
+            
+            var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
             services.AddDbContext<DataContext>(x =>
             {
-                x.UseNpgsql(Configuration.GetConnectionString("UsersDb"));
+                x.UseNpgsql(connectionString);
                 x.UseSnakeCaseNamingConvention();
                 
                 x.UseLazyLoadingProxies();
@@ -74,7 +77,7 @@ namespace Otus.Home.UsersApi.Host
                 endpoints.MapControllers();
             });
             
-            // dbInitializer.InitializeDb();
+            dbInitializer.InitializeDb();
         }
     }
 }

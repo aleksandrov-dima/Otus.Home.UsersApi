@@ -31,3 +31,22 @@ spec:
               path: /health
             initialDelaySeconds: 10
             periodSeconds: 5
+          env:
+            - name: "ASPNETCORE_ENVIRONMENT"
+              value: "Kubernetes"
+            - name: "DB_CONNECTION_STRING"
+              value: "Host=mypostgres-postgresql;Database=users_db;Username=postgres;Password=vtv536C5SF;Port=5432"
+          volumeMounts:
+            - name: appsettings-volume
+              mountPath: /app/appsettings.json
+              subPath: appsettings.json
+            - name: secrets-volume
+              mountPath: /app/secrets
+              readOnly: true
+      volumes:
+        - name: appsettings-volume
+          configMap:
+            name: appsettings-config-map
+        - name: secrets-volume
+          secret:
+            secretName: secret-appsettings

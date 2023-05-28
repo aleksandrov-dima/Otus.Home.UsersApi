@@ -7,4 +7,4 @@ helm install mypostgres bitnami/postgresql
 kubectl apply -f .\Manifests\migratejob.yml
 
 Команда публикации приложения:
-kubectl apply -f .\Manifests\deployment_api.yml -f .\Manifests\service.yml
+kubectl apply -f .\Manifests\configmap.yml -f .\Manifests\deployment_api.yml -f .\Manifests\service.yml
