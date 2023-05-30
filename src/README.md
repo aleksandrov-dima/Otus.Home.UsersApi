@@ -20,4 +20,4 @@
 
 ## Примеры запроса
 ```curl --location --request GET 'http://localhost/api/v1/Users' --header 'Host: arch.homework'```
-```curl --location --request GET 'http://localhost/api/v1/health' --header 'Host: arch.homework'```
+```curl --location --request GET 'http://localhost/health' --header 'Host: arch.homework'```
