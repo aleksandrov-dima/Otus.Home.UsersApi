@@ -4,8 +4,8 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src
 COPY ["Otus.Home.UsersApi.MigrateJob/Otus.Home.UsersApi.MigrateJob.csproj", "Otus.Home.UsersApi.MigrateJob/"]
-COPY ["../Otus.Home.UsersApi.DataAccess/Otus.Home.UsersApi.DataAccess.csproj", "Otus.Home.UsersApi.DataAccess/"]
-COPY ["./src/Otus.Home.UsersApi.Core/Otus.Home.UsersApi.Core.csproj", "Otus.Home.UsersApi.Core/"]
+COPY ["Otus.Home.UsersApi.DataAccess/Otus.Home.UsersApi.DataAccess.csproj", "Otus.Home.UsersApi.DataAccess/"]
+COPY ["Otus.Home.UsersApi.Core/Otus.Home.UsersApi.Core.csproj", "Otus.Home.UsersApi.Core/"]
 RUN dotnet restore "Otus.Home.UsersApi.MigrateJob/Otus.Home.UsersApi.MigrateJob.csproj"
 COPY . .
 WORKDIR "/src/Otus.Home.UsersApi.MigrateJob"

@@ -13,15 +13,9 @@ namespace Otus.Home.UserApi.MigrateJob
 		public DataContext CreateDbContext(string[] args)
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
-
-			// получаем конфигурацию из файла appsettings.json
-			var builder = new ConfigurationBuilder();
-			builder.SetBasePath(Directory.GetCurrentDirectory());
-			builder.AddJsonFile("appsettings.json");
-			IConfigurationRoot config = builder.Build();
 			
-			// получаем строку подключения из файла appsettings.json
-			string connectionString = config.GetConnectionString("UsersDb");
+			// получаем строку подключения из секретного Environment
+			var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
 			optionsBuilder.UseNpgsql(connectionString, opts => opts.CommandTimeout((int)TimeSpan.FromMinutes(10).TotalSeconds));
 			optionsBuilder.UseSnakeCaseNamingConvention();
 			return new DataContext(optionsBuilder.Options);

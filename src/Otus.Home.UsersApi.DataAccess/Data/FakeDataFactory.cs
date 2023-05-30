@@ -10,7 +10,7 @@ namespace Otus.Home.UsersApi.DataAccess.Data
         {
             get
             {
-                var userId = Guid.Parse("a6c8c6b1-4349-45b0-ab31-244740aaf0f0");
+                var userId = new Guid();
                 var user = new List<User>()
                 {
                     new User()

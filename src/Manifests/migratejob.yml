@@ -8,5 +8,21 @@ spec:
       containers:
         - name: otus-home-user-api-migratejob-container
           image: dimandocker/otus.home.userapi.migratejob:1.0
+          env:
+            - name: "ASPNETCORE_ENVIRONMENT"
+              value: "Kubernetes"
+            - name: "DB_CONNECTION_STRING"
+              valueFrom:
+                secretKeyRef:
+                  name: secret-environment
+                  key: DB_CONNECTION_STRING
+          volumeMounts:
+            - name: appsettings-volume
+              mountPath: /app/appsettings.json
+              subPath: appsettings.json
+      volumes:
+        - name: appsettings-volume
+          configMap:
+            name: appsettings-config-map
       restartPolicy: Never
   backoffLimit: 2
