@@ -57,6 +57,38 @@
 			"response": []
 		},
 		{
+			"name": "deleteUser",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Host",
+						"value": "arch.homework",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost/api/v1/Users?id=d861e9f4-9105-47d8-8d2d-516a5eb6bb97",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"Users"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "d861e9f4-9105-47d8-8d2d-516a5eb6bb97"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "addUsers",
 			"request": {
 				"method": "POST",
