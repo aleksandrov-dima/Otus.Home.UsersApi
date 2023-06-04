@@ -1,7 +1,9 @@
 # Otus.Home.UsersApi
 
 ## Команда установки PostgresSql:
-```helm install mypostgres bitnami/postgresql```
+```helm repo update```
+
+``` helm install mypostgres bitnami/postgresql -f .\Manifests\values.yml```
 
 ## Команда создания конфига и секрета
 ```kubectl apply -f .\Manifests\configmap.yml -f .\Manifests\secrets.yml```
