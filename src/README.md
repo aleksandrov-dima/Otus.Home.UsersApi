@@ -25,4 +25,4 @@
 ```newman run .\Otus.postman_collection.json```
 
 ## Удаление приложения
-```kubectl delete service/otus-home-user-api-service deployment/otus-home-user-api-deployment ingress/otus-home-user-api-ingress job/otus-home-user-api-migratejob```
+```kubectl delete service/otus-home-user-api-service deployment/otus-home-user-api-deployment ingress/otus-home-user-api-ingress job/otus-home-user-api-migratejob ConfigMap/appsettings-config-map Secret/secret-environment```
