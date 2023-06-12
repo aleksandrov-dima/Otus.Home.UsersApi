@@ -20,3 +20,9 @@
 ## Примеры запроса
 ```curl --location --request GET 'http://localhost/api/v1/Users' --header 'Host: arch.homework'```
 ```curl --location --request GET 'http://localhost/health' --header 'Host: arch.homework'```
+
+## Тесты через newman
+```newman run .\Otus.postman_collection.json```
+
+## Удаление приложения
+```kubectl delete service/otus-home-user-api-service deployment/otus-home-user-api-deployment ingress/otus-home-user-api-ingress job/otus-home-user-api-migratejob```

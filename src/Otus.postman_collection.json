@@ -14,14 +14,16 @@
 					{
 						"key": "Host",
 						"value": "arch.homework",
-						"type": "text"
+						"type": "text",
+						"disabled": true
 					}
 				],
 				"url": {
-					"raw": "http://localhost/health",
+					"raw": "http://arch.homework/health",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"arch",
+						"homework"
 					],
 					"path": [
 						"health"
@@ -38,14 +40,16 @@
 					{
 						"key": "Host",
 						"value": "arch.homework",
-						"type": "text"
+						"type": "text",
+						"disabled": true
 					}
 				],
 				"url": {
-					"raw": "http://localhost/api/v1/Users",
+					"raw": "http://arch.homework/api/v1/Users",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"arch",
+						"homework"
 					],
 					"path": [
 						"api",
@@ -64,14 +68,16 @@
 					{
 						"key": "Host",
 						"value": "arch.homework",
-						"type": "text"
+						"type": "text",
+						"disabled": true
 					}
 				],
 				"url": {
-					"raw": "http://localhost/api/v1/Users?id=d861e9f4-9105-47d8-8d2d-516a5eb6bb97",
+					"raw": "http://arch.homework/api/v1/Users?id=d861e9f4-9105-47d8-8d2d-516a5eb6bb97",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"arch",
+						"homework"
 					],
 					"path": [
 						"api",
@@ -96,7 +102,8 @@
 					{
 						"key": "Host",
 						"value": "arch.homework",
-						"type": "text"
+						"type": "text",
+						"disabled": true
 					},
 					{
 						"key": "Content-Type",
@@ -109,10 +116,11 @@
 					"raw": "{\r\n  \"firstName\": \"Иванов\",\r\n  \"lastName\": \"Иван\",\r\n  \"email\": \"ivanov@mail.com\"\r\n}"
 				},
 				"url": {
-					"raw": "http://localhost/api/v1/Users",
+					"raw": "http://arch.homework/api/v1/Users",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"arch",
+						"homework"
 					],
 					"path": [
 						"api",

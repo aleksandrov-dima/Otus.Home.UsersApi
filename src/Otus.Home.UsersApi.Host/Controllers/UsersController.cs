@@ -102,10 +102,23 @@ namespace Otus.Home.UsersApi.Host.Controllers
         public async Task<IActionResult> DeleteUser(Guid id)
         {
             //TODO Протестировать удаление
-            var customer = await _userRepository.GetByIdAsync(id);
-            await _userRepository.DeleteAsync(customer);
+            try
+            {
+                var customer = await _userRepository.GetByIdAsync(id);
+                if (customer != null)
+                {
+                    await _userRepository.DeleteAsync(customer);
+                    return Ok();
+                }
 
-            return Ok();
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return BadRequest("Произошла ошибка при удалении");
+            }
+           
         }
     }
 }
